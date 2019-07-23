@@ -1,0 +1,29 @@
+<!--This page displays the prices of individual cryptocurrency that you type in
+    lookup crypto form(searchbar)-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if notfound %}
+        <h3>{{ notfound }}</h3>
+    {% else %}
+        <!--ERROR HANDLING-->
+        {% if crypto.Response %}
+            <h3>Sorry, that symbol doesn't exist. Please try again...</h3>
+        {% endif %}
+
+
+        {% for key,value in crypto.DISPLAY.items %}
+              <strong>Name: </strong>{{ key }}<br>
+              <strong>Price: </strong>{{ value.USD.PRICE }}<br>
+              <strong>24h High: </strong>{{ value.USD.HIGHDAY }}<br>
+              <strong>24h Low: </strong>{{ value.USD.LOWDAY }}<br>
+              <strong>Market Cap: </strong>{{ value.USD.MKTCAP }}<br>
+              <hr><br>
+
+        {% endfor %}
+        <br><br>
+    {% endif %}
+
+{% endblock %}
